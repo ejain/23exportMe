@@ -1,0 +1,22 @@
+#content h1, #content p, #content a {
+    font-family: 'Mate SC', serif;
+}
+#content p {
+    font-size: 16px;
+}
+#content p.disclaimer {
+    font-size: 12px;
+    color: #aaa;
+}
+.logo {
+    vertical-align: -8px;
+}
+a {
+    color: #659EC7;
+}
+.button.secondary {
+    background-color: #fffbe3;
+}
+.button.secondary:hover {
+    background-color: #ebe5c0;
+}

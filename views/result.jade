@@ -1,0 +1,6 @@
+extends layout
+
+block content
+    h1 Your results
+    each risk, i in risks
+        p <b>#{risk.report_id}</b> #{risk.description} -> #{risk.risk}
