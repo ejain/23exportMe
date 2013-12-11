@@ -1,9 +1,18 @@
 extends layout
 
 block content
-    h1 23exportMe
-    p They support us until they don't.
-    a.button.large.secondary(href="https://api.23andme.com/authorize/?redirect_uri=#{redirect_uri}&response_type=code&client_id=#{client_id}&scope=#{scope}")
-        img.logo(src="/images/23andMe-logo.png", width="30px", height="30px")
-        span Export Analyses
 
+    .header &nbsp;
+
+    .jumbotron
+        h1 23exportMe
+        p.lead 
+            | Export your <a href="https://www.23andme.com/">23andMe</a> analyses data to a spreadsheet.
+        p
+            a.btn.btn-lg.btn-success(href="https://api.23andme.com/authorize/?redirect_uri=#{redirect_uri}&response_type=code&client_id=#{client_id}&scope=#{scope}", role="button") Export
+
+    .footer
+        p &copy; 2013 
+            a(href="https://zenobase.com/") Zenobase LLC
+            span &nbsp; | 
+            a(href="https://github.com/ejain/23exportMe") GitHub
