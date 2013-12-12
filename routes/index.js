@@ -1,8 +1,6 @@
 var async = require('async');
 var http = require('request');
 var json2csv = require('json2csv');
-var cookie = require('express/node_modules/cookie');
-var connect = require('express/node_modules/connect');
 
 function newOAuth(base_uri, access_token) {
   return {
