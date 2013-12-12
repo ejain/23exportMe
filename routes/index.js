@@ -33,12 +33,12 @@ function newTask(oauth, profile_id, path, fields) {
   return function(callback) {
     oauth.get('/' + path + '/' + profile_id, function (e, r, body) {
       if (body.traits) {
-      	for (var i = 0; i < body.traits.length; i++) {
-      		body.traits[i].profile_id = profile_id;
-      	}
-      	json2csv({ data : body.traits, fields : fields }, function(e, csv) {
-      		callback(e, { path : path, data : csv });
-      	});
+        for (var i = 0; i < body.traits.length; i++) {
+          body.traits[i].profile_id = profile_id;
+        }
+        json2csv({ data : body.traits, fields : fields }, function(e, csv) {
+          callback(e, { path : path, data : csv });
+        });
       }
    });
   };
@@ -46,9 +46,9 @@ function newTask(oauth, profile_id, path, fields) {
 
 exports.index = function(request, response, scope) {
 
-	var access_token = request.signedCookies.access_token;
+  var access_token = request.signedCookies.access_token;
 
-	if (!access_token) {
+  if (!access_token) {
     response.render('index', {
       client_id : process.env.CLIENT_ID,
       scope : scope,
@@ -66,20 +66,20 @@ exports.index = function(request, response, scope) {
     tasks.push(newTask(oauth, profile_id, 'drug_responses', [ 'profile_id', 'report_id', 'description', 'status' ]));
     tasks.push(newTask(oauth, profile_id, 'traits', [ 'profile_id', 'report_id', 'trait' ]));
   },function() {
-  	async.series(tasks, function(e, csv) {
-  		response.clearCookie('access_token');
-  		if (csv && csv.length) {
-  			response.set('Content-Type', 'text/plain');
-  			response.set('Content-Disposition', 'attachment; filename=analyses.csv');
-  			for (var i = 0; i < csv.length; ++i) {
-  				response.write(csv[i].path + "\n");
-  				response.write(csv[i].data + "\n\n");
-  			}
-    		response.end();
-  		} else {
+    async.series(tasks, function(e, csv) {
+      response.clearCookie('access_token');
+      if (csv && csv.length) {
+        response.set('Content-Type', 'text/plain');
+        response.set('Content-Disposition', 'attachment; filename=analyses.csv');
+        for (var i = 0; i < csv.length; ++i) {
+          response.write(csv[i].path + "\n");
+          response.write(csv[i].data + "\n\n");
+        }
+        response.end();
+      } else {
         response.render('error');
-  		}
-  	});
+      }
+    });
   });
 };
 
